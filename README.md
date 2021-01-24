@@ -1,5 +1,7 @@
 # Ccs811
 
+![Elixir CI](https://github.com/Efesto/ccs811/workflows/Elixir%20CI/badge.svg)
+
 Driver for CCS811 Ultra-Low Power Digital Gas Sensor for Monitoring Indoor Air Quality
 
 [Datasheet](https://cdn.sparkfun.com/assets/learn_tutorials/1/4/3/CCS811_Datasheet-DS000459.pdf)
