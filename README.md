@@ -52,7 +52,23 @@ Add to your application initialization
 Which will set the driver to periodically execute a telemetry event named `[:ccs811, :read]` 
 with a new data map containing values for eCO2 `:eco2` and TVOC `tvoc`
 
+## Initialization
+
+both `Ccs811.start_polling()` and `Ccs811.initialize()` supports additional configuration parameters that can be passed as a keyword list
+
+|Key|description|default
+|---|---|-----|
+|`:slave_address`|the sensor slave address|0x5A
+|`:period`|the polling period in seconds|30
+
+Example:
+
+```elixir
+Ccs811.start_polling(period: 60)
+```
+
+
 ### Missing features:
 - Configuring humidity and temperature
 - Interrupt based data reading instead of polling
-- Configuration for Bus-name and polling period (currently it uses the first available I2C bus)
+- Configuration for Bus-name (currently it uses the first available I2C bus)
