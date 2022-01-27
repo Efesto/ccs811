@@ -22,13 +22,17 @@ defmodule Ccs811 do
     end
   end)
 
-  def initialize() do
+  def initialize(args \\ []) do
+    :ok = Registries.init(args)
     app_start()
     set_meas_mode(:mode_1)
+
+    :ok
   end
 
-  def start_polling() do
-    Ccs811.Telemetry.start_polling()
+  @spec start_polling(keyword) :: :ignore | {:error, any} | {:ok, pid} | {:ok, pid, any}
+  def start_polling(args \\ []) do
+    Ccs811.Telemetry.start_polling(args)
   end
 
   def app_verify(), do: write_registry(Registries.verify())
@@ -134,6 +138,7 @@ defmodule Ccs811 do
   end
 
   defp get_i2c_bus_name do
+    # TOD: check for application config
     case Circuits.I2C.bus_names() do
       [] -> {:error, :no_bus_names}
       [first_available_bus_name | _] -> {:ok, first_available_bus_name}
