@@ -1,4 +1,21 @@
 defmodule Ccs811.Registries do
+  @moduledoc """
+  Represents the registries configuration, needs to be initialized
+  """
+
+  @table_name :registries_config
+  @default_slave_address 0x5A
+  @slave_address_key :slave_address
+
+  def init(opts \\ []) do
+    :ets.new(@table_name, [:set, :private, :named_table])
+
+    slave_address = Keyword.get(opts, :slave_address, @default_slave_address)
+    :ets.insert(@table_name, {@slave_address_key, slave_address})
+
+    :ok
+  end
+
   def all() do
     %{
       status: %{address: 0x00, bytes: 1, read: true, write: false},
@@ -21,5 +38,10 @@ defmodule Ccs811.Registries do
   def verify(), do: 0xF3
   def start(), do: 0xF4
 
-  def slave_address(), do: 0x5A
+  def slave_address() do
+    [{@slave_address_key, slave_address}] = :ets.lookup(@table_name, :slave_address)
+    slave_address
+  rescue
+    _ -> raise "#{__MODULE__} not initialized, use #{__MODULE__}.init before trying to use it"
+  end
 end
