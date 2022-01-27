@@ -56,10 +56,9 @@ with a new data map containing values for eCO2 `:eco2` and TVOC `tvoc`
 
 both `Ccs811.start_polling()` and `Ccs811.initialize()` supports additional configuration parameters that can be passed as a keyword list
 
-|Key|description|default
-|---|---|-----|
-|`:slave_address`|the sensor slave address|0x5A
-|`:period`|the polling period in seconds|30
+key - description - default value
+* `:slave_address` - the sensor slave address - 0x5A
+* `:period` - the polling period in seconds - 30
 
 Example:
 
