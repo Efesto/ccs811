@@ -2,7 +2,7 @@ defmodule Ccs811.MixProject do
   use Mix.Project
 
   @source_url "https://github.com/Efesto/ccs811"
-  @version "0.1.0"
+  @version "0.2.0"
 
   def project do
     [
@@ -14,7 +14,7 @@ defmodule Ccs811.MixProject do
       aliases: aliases(),
       description: description(),
       docs: docs(),
-      package: package(),
+      package: package()
     ]
   end
 
@@ -34,7 +34,7 @@ defmodule Ccs811.MixProject do
       extras: ["README.md"],
       main: "readme",
       source_ref: "v#{@version}",
-      source_url: @source_url,
+      source_url: @source_url
     ]
   end
 
@@ -60,7 +60,7 @@ defmodule Ccs811.MixProject do
       links: %{
         "GitHub" => @source_url,
         "Ccs811 Datasheet" =>
-          "https://cdn.sparkfun.com/assets/learn_tutorials/1/4/3/CCS811_Datasheet-DS000459.pdf",
+          "https://cdn.sparkfun.com/assets/learn_tutorials/1/4/3/CCS811_Datasheet-DS000459.pdf"
       }
     ]
   end
