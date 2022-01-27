@@ -5,11 +5,13 @@ defmodule Ccs811.Telemetry do
   @poller_name :ccs811_poller
   @default_polling_period 30
 
-  def start_link(arg) do
-    DynamicSupervisor.start_link(__MODULE__, arg, name: __MODULE__)
+  def start_link(args) do
+    DynamicSupervisor.start_link(__MODULE__, args, name: __MODULE__)
   end
 
-  def start_polling(period \\ @default_polling_period) do
+  def start_polling(args) do
+    {period, args} = Keyword.pop(args, :period, @default_polling_period)
+
     opts = [
       measurements: [{__MODULE__, :poll_read, []}],
       period: :timer.seconds(period),
@@ -17,6 +19,8 @@ defmodule Ccs811.Telemetry do
     ]
 
     spec = :telemetry_poller.child_spec(opts)
+
+    :ok = Ccs811.initialize(args)
 
     DynamicSupervisor.start_child(__MODULE__, spec)
   end
@@ -31,8 +35,7 @@ defmodule Ccs811.Telemetry do
   end
 
   @impl true
-  def init(_arg) do
-    Ccs811.initialize()
+  def init(_args) do
     DynamicSupervisor.init(strategy: :one_for_one)
   end
 
