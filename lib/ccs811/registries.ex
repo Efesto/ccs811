@@ -8,7 +8,7 @@ defmodule Ccs811.Registries do
   @slave_address_key :slave_address
 
   def init(opts \\ []) do
-    :ets.new(@table_name, [:set, :private, :named_table])
+    :ets.new(@table_name, [:set, :protected, :named_table])
 
     slave_address = Keyword.get(opts, :slave_address, @default_slave_address)
     :ets.insert(@table_name, {@slave_address_key, slave_address})
@@ -42,6 +42,6 @@ defmodule Ccs811.Registries do
     [{@slave_address_key, slave_address}] = :ets.lookup(@table_name, :slave_address)
     slave_address
   rescue
-    _ -> raise "#{__MODULE__} not initialized, use #{__MODULE__}.init before trying to use it"
+    _ -> raise "#{__MODULE__} not initialized, use #{__MODULE__}.init before using it"
   end
 end
