@@ -22,6 +22,14 @@ defmodule Ccs811 do
     end
   end)
 
+  @doc """
+  Initializes the registries repository and the sensors,
+  must be invoked before starting using the sensor
+
+  It supports additional arguments:
+
+  `:slave_address` - slave address of the sensor, default: 0x5A
+  """
   def initialize(args \\ []) do
     :ok = Registries.init(args)
     app_start()
@@ -30,10 +38,7 @@ defmodule Ccs811 do
     :ok
   end
 
-  @spec start_polling(keyword) :: :ignore | {:error, any} | {:ok, pid} | {:ok, pid, any}
-  def start_polling(args \\ []) do
-    Ccs811.Telemetry.start_polling(args)
-  end
+  defdelegate start_polling(args), to: Ccs811.Telemetry
 
   def app_verify(), do: write_registry(Registries.verify())
   def app_start(), do: write_registry(Registries.start())

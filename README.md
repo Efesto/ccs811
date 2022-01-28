@@ -19,7 +19,7 @@ def deps do
 end
 ```
 
-## Usage:
+## Usage
 ### Standalone
 ```elixir
 iex(1)> Ccs811.initialize
@@ -41,7 +41,7 @@ iex(23)> Ccs811.read_status
 %{app_valid: true, data_ready: true, error: false, fw_mode: true}
 ```
 
-### With Telemetry:
+### With Telemetry
 
 Add to your application initialization
 
@@ -56,16 +56,7 @@ with a new data map containing values for eCO2 `:eco2` and TVOC `tvoc`
 
 both `Ccs811.start_polling()` and `Ccs811.initialize()` supports additional configuration parameters that can be passed as a keyword list
 
-key - description - default value
-* `:slave_address` - the sensor slave address - 0x5A
-* `:period` - the polling period in seconds - 30
-
-Example:
-
-```elixir
-Ccs811.start_polling(period: 60)
-```
-
+see `Ccs811.start_polling/1` and `Ccs811.initialize/1` for further details
 
 ### Missing features:
 - Configuring humidity and temperature

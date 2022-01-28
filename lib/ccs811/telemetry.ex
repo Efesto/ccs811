@@ -1,5 +1,4 @@
 defmodule Ccs811.Telemetry do
-  @moduledoc false
   use DynamicSupervisor
 
   @poller_name :ccs811_poller
@@ -9,6 +8,20 @@ defmodule Ccs811.Telemetry do
     DynamicSupervisor.start_link(__MODULE__, args, name: __MODULE__)
   end
 
+  @doc """
+  Starts a periodic poller that generates telemetry events containing the sensor readings
+
+  It supports additional arguments:
+
+  `:period` - polling period in seconds, default: #{@default_polling_period}
+
+  Any other additional argument will be passed to `Ccs811.initialize()`
+
+  Example:
+  ```
+  Ccs811.start_polling(period: 60)
+  ```
+  """
   def start_polling(args) do
     {period, args} = Keyword.pop(args, :period, @default_polling_period)
 
