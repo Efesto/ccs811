@@ -19,4 +19,20 @@ defmodule Ccs811.RegistriesTest do
       assert_raise(RuntimeError, fn -> Registries.slave_address() end)
     end
   end
+
+  describe "init/0" do
+    test "doesn't allow double init invoked twice" do
+      :ok = Registries.init()
+
+      {:error, :already_initialized} = Registries.init()
+    end
+
+    test "doesn't override previous init values" do
+      :ok = Registries.init(slave_address: 123)
+
+      {:error, :already_initialized} = Registries.init()
+
+      assert Registries.slave_address() == 123
+    end
+  end
 end

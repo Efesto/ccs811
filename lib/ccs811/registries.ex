@@ -1,6 +1,6 @@
 defmodule Ccs811.Registries do
   @moduledoc """
-  Represents the registries configuration, needs to be initialized
+  Represents the registries configuration, needs to be initialized before accessing
   """
 
   @table_name :registries_config
@@ -8,12 +8,16 @@ defmodule Ccs811.Registries do
   @slave_address_key :slave_address
 
   def init(opts \\ []) do
-    :ets.new(@table_name, [:set, :protected, :named_table])
+    case :ets.info(@table_name) do
+      :undefined ->
+        :ets.new(@table_name, [:set, :protected, :named_table])
+        slave_address = Keyword.get(opts, :slave_address, @default_slave_address)
+        :ets.insert(@table_name, {@slave_address_key, slave_address})
+        :ok
 
-    slave_address = Keyword.get(opts, :slave_address, @default_slave_address)
-    :ets.insert(@table_name, {@slave_address_key, slave_address})
-
-    :ok
+      _ ->
+        {:error, :already_initialized}
+    end
   end
 
   def all() do
