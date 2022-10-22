@@ -8,7 +8,7 @@ defmodule Ccs811.MixProject do
     [
       app: :ccs811,
       version: @version,
-      elixir: "~> 1.9",
+      elixir: "~> 1.11",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
       aliases: aliases(),
