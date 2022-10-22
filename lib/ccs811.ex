@@ -50,6 +50,8 @@ defmodule Ccs811 do
   def set_meas_mode(:mode_3), do: write_meas_mode(<<48>>)
   def set_meas_mode(:mode_4), do: write_meas_mode(<<64>>)
 
+  def reset, do: write_sw_reset(<<11, 229, 72, 138>>)
+
   def translate(<<data>>, :status) do
     %{
       fw_mode: data |> bit_mask_to_boolean(128),
@@ -143,7 +145,6 @@ defmodule Ccs811 do
   end
 
   defp get_i2c_bus_name do
-    # TOD: check for application config
     case Circuits.I2C.bus_names() do
       [] -> {:error, :no_bus_names}
       [first_available_bus_name | _] -> {:ok, first_available_bus_name}
