@@ -14,13 +14,15 @@ by adding `ccs811` to your list of dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {:ccs811, "~> <LATEST_VERSION>"}
+    {:ccs811, "~> 0.3.0"}
   ]
 end
 ```
 
 ## Usage
+
 ### Standalone
+
 ```elixir
 iex(1)> Ccs811.initialize
 iex(2)> Ccs811.read_alg_result_data
@@ -49,7 +51,7 @@ Add to your application initialization
   Ccs811.start_polling()
 ```
 
-Which will set the driver to periodically execute a telemetry event named `[:ccs811, :read]` 
+Which will set the driver to periodically execute a telemetry event named `[:ccs811, :read]`
 with a new data map containing values for eCO2 `:eco2` and TVOC `tvoc`
 
 ## Initialization
@@ -58,7 +60,8 @@ both `Ccs811.start_polling()` and `Ccs811.initialize()` supports additional conf
 
 see `Ccs811.start_polling/1` and `Ccs811.initialize/1` for further details
 
-### Missing features:
+### Missing features
+
 - Configuring humidity and temperature
 - Interrupt based data reading instead of polling
 - Configuration for Bus-name (currently it uses the first available I2C bus)
