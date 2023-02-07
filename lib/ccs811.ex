@@ -2,7 +2,7 @@ defmodule Ccs811 do
   alias Circuits.I2C
   alias Ccs811.Registries
 
-  use Bitwise
+  import Bitwise
 
   Registries.all()
   |> Enum.filter(fn {_, %{read: read}} -> read end)
