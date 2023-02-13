@@ -1,6 +1,8 @@
 # Ccs811
 
 ![Elixir CI](https://github.com/Efesto/ccs811/workflows/Elixir%20CI/badge.svg)
+[![Hex pm](https://img.shields.io/hexpm/v/ccs811.svg?style=flat)](https://hex.pm/packages/ccs811)
+[![Hexdocs.pm](https://img.shields.io/badge/hex-docs-lightgreen.svg)](https://hexdocs.pm/ccs811/)
 
 Driver for CCS811 Ultra-Low Power Digital Gas Sensor for Monitoring Indoor Air Quality
 
@@ -8,8 +10,7 @@ Driver for CCS811 Ultra-Low Power Digital Gas Sensor for Monitoring Indoor Air Q
 
 ## Installation
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `ccs811` to your list of dependencies in `mix.exs`:
+The package can be installed by adding `ccs811` to your list of dependencies in `mix.exs`:
 
 ```elixir
 def deps do
@@ -56,12 +57,9 @@ with a new data map containing values for eCO2 `:eco2` and TVOC `tvoc`
 
 ## Initialization
 
-both `Ccs811.start_polling()` and `Ccs811.initialize()` supports additional configuration parameters that can be passed as a keyword list
-
-see `Ccs811.start_polling/1` and `Ccs811.initialize/1` for further details
+both [`Ccs811.start_polling()`](https://hexdocs.pm/ccs811/Ccs811.html#initialize/1) and [`Ccs811.initialize()`](https://hexdocs.pm/ccs811/Ccs811.html#initialize/1) supports additional configuration parameters that can be passed as a keyword list
 
 ### Missing features
 
-- Configuring humidity and temperature
 - Interrupt based data reading instead of polling
 - Configuration for Bus-name (currently it uses the first available I2C bus)
