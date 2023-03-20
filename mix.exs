@@ -40,7 +40,7 @@ defmodule Ccs811.MixProject do
 
   defp deps do
     [
-      {:circuits_i2c, "~> 1.1.0"},
+      {:circuits_i2c, "~> 1.2.0"},
       {:telemetry_poller, "~> 1.0"},
       {:ex_doc, ">= 0.0.0", only: :dev, runtime: false}
     ]
