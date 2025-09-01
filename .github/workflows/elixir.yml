@@ -9,11 +9,14 @@ on:
 jobs:
   build:
     name: Build and test
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     strategy:
       matrix:
-        otp: ["22.3.4", "23.3.4", "24.3.4"]
-        elixir: ["1.11.4", "1.12.3", "1.13.4"]
+        elixir: ["1.16.0", "1.17.0"]
+        otp: ["26.2.5", "27.1.2"]
+        include:
+          - elixir: "1.18.4"
+            otp: "28.0.1"
     steps:
       - uses: actions/checkout@v4
       - name: Set up Elixir
@@ -22,14 +25,16 @@ jobs:
           otp-version: ${{matrix.otp}}
           elixir-version: ${{matrix.elixir}}
       - name: Restore dependencies cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: deps
           key: ${{ runner.os }}-mix-${{ hashFiles('**/mix.lock') }}
           restore-keys: ${{ runner.os }}-mix-
       - name: Install dependencies
-        run: mix deps.get
+        run: mix deps.get --check-locked
       - name: Compile
         run: mix compile --warnings-as-errors
+      - name: Format check
+        run: mix format
       - name: Run tests
         run: mix test
