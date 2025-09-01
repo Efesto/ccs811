@@ -53,11 +53,11 @@ Add to your application initialization
 ```
 
 Which will set the driver to periodically execute a telemetry event named `[:ccs811, :read]`
-with a new data map containing values for eCO2 `:eco2` and TVOC `tvoc`
+with a new data map containing values for eCO2 `:eco2` and TVOC `:tvoc`.
 
 ## Initialization
 
-both [`Ccs811.start_polling()`](https://hexdocs.pm/ccs811/Ccs811.html#initialize/1) and [`Ccs811.initialize()`](https://hexdocs.pm/ccs811/Ccs811.html#initialize/1) supports additional configuration parameters that can be passed as a keyword list
+both [`Ccs811.start_polling()`](https://hexdocs.pm/ccs811/Ccs811.html#initialize/1) and [`Ccs811.initialize()`](https://hexdocs.pm/ccs811/Ccs811.html#initialize/1) supports additional configuration parameters that can be passed as a keyword list.
 
 ### Missing features
 
