@@ -15,7 +15,7 @@ The package can be installed by adding `ccs811` to your list of dependencies in 
 ```elixir
 def deps do
   [
-    {:ccs811, "~> 0.3.0"}
+    {:ccs811, "~> 0.4.0"}
   ]
 end
 ```
