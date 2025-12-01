@@ -18,7 +18,7 @@ jobs:
           - elixir: "1.18.4"
             otp: "28.0.1"
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - name: Set up Elixir
         uses: erlef/setup-beam@v1
         with:
